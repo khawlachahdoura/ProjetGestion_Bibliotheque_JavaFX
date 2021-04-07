@@ -1,6 +1,7 @@
 package controller;
 
 import java.util.ArrayList;
+
 import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
@@ -178,24 +179,24 @@ public class Controller {
 		 * //Reflection for gridPane Reflection r = new Reflection();
 		 * r.setFraction(0.7f); gridPane.setEffect(r);
 		 */
-		Label nom = new Label("Ajouter un Emprunt :");
+		/*Label nom = new Label("Ajouter un Emprunt :");
 
 		gridPane.add(nom, 0, 0);
 
 		// Implementing Nodes for GridPane
 		Label dateemp = new Label("DateEmprunt");
 		final TextField txtUserName = new TextField();
-		// Label lblPassword = new Label("Password");
+		
 
 		Label dateR = new Label("Date de retour");
-		final TextField txtdateR = new TextField();
-		// Label lblPassword = new Label("Password");
+		final DateField txtdateR = new DateField();
+		
 		Label idExemplaire = new Label("codeExemplaire");
 		final TextField txtidExemp = new TextField();
-		// Label lblPassword = new Label("Password");
+		
 		Label idEtudiant = new Label("codeEtudiant");
 		final TextField txtidEtudiant = new TextField();
-		// Label lblPassword = new Label("Password");
+	
 
 		Button btnLogin = new Button("Vérifier");
 		final Label lblMessage = new Label();
@@ -223,10 +224,9 @@ public class Controller {
 		btnLogin.setOnAction(new EventHandler<ActionEvent>() {
 
 			public void handle(ActionEvent event) {
-Emprunt emprunt =new Emprunt(idExemplaire, idEtudiant, date_E, date_RE, etat)
+Emprunt emprunt =new Emprunt(txtidExemp, txtidExemp, txtUserName, dateR, 0);
 				String checkUser = txtUserName.getText().toString();
-				// daoe.recherche(checkUser);
-				// checkPw = pf.getText().toString();
+				
 				if (checkUser.equals(user)) {
 					lblMessage.setText("Entrer");
 					lblMessage.setTextFill(Color.GREEN);
@@ -239,7 +239,7 @@ Emprunt emprunt =new Emprunt(idExemplaire, idEtudiant, date_E, date_RE, etat)
 				txtUserName.setText("");
 				// pf.setText("");
 			}
-		});
+		});*/
 
 		root.setCenter(gridPane);
 	}
