@@ -1,5 +1,7 @@
 package controller;
 
+import java.time.Instant;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 
@@ -20,6 +22,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -184,17 +187,20 @@ Button btnadd = new Button("Ajouter");
 		 * //Reflection for gridPane Reflection r = new Reflection();
 		 * r.setFraction(0.7f); gridPane.setEffect(r);
 		 */
-		/*Label nom = new Label("Ajouter un Emprunt :");
+		Label nom = new Label("Ajouter un Emprunt :");
 
 		gridPane.add(nom, 0, 0);
 
 		// Implementing Nodes for GridPane
+		
 		Label dateemp = new Label("DateEmprunt");
-		final TextField txtUserName = new TextField();
+		final DatePicker datePicker = new DatePicker(); 
+        datePicker.setValue(LocalDate.MIN);
 		
 
 		Label dateR = new Label("Date de retour");
-		final DateField txtdateR = new DateField();
+		final DatePicker datePicker_r = new DatePicker(); 
+		datePicker_r.setValue(LocalDate.MIN);
 		
 		Label idExemplaire = new Label("codeExemplaire");
 		final TextField txtidExemp = new TextField();
@@ -210,11 +216,11 @@ Button btnadd = new Button("Ajouter");
 		gridPane.add(lblMessage, 1, 5);
 		// Adding Nodes to GridPane layout
 		gridPane.add(dateemp, 0, 1);
-		gridPane.add(txtUserName, 1, 1);
+		gridPane.add(datePicker, 1, 1);
 		// gridPane.add(lblPassword, 0, 1);
 
 		gridPane.add(dateR, 0, 2);
-		gridPane.add(txtdateR, 1, 2);
+		gridPane.add(datePicker_r, 1, 2);
 		gridPane.add(idExemplaire, 0, 3);
 		gridPane.add(txtidExemp, 1, 3);
 		gridPane.add(idEtudiant, 0, 4);
@@ -229,10 +235,16 @@ Button btnadd = new Button("Ajouter");
 		btnLogin.setOnAction(new EventHandler<ActionEvent>() {
 
 			public void handle(ActionEvent event) {
-Emprunt emprunt =new Emprunt(txtidExemp, txtidExemp, txtUserName, dateR, 0);
-				String checkUser = txtUserName.getText().toString();
+
+				//String checkUser = txtUserName.getText().toString();
+				int idex=txtidExemp.getLength();
+				int idetd=txtidEtudiant.getLength();
 				
-				if (checkUser.equals(user)) {
+				java.sql.Date date=(java.sql.Date) Date.class.cast(datePicker);
+				java.sql.Date date1=(java.sql.Date) Date.class.cast(datePicker_r);
+				Emprunt emprunt = new Emprunt(idex, idetd, date, date1, 0);
+				boolean test = gEmprunt.addEmprunt(emprunt);
+				if (test) {
 					lblMessage.setText("Entrer");
 					lblMessage.setTextFill(Color.GREEN);
 					// c1.creerTableViewEmprunt();
@@ -241,23 +253,14 @@ Emprunt emprunt =new Emprunt(txtidExemp, txtidExemp, txtUserName, dateR, 0);
 					lblMessage.setText("Incorrect user or pw.");
 					lblMessage.setTextFill(Color.RED);
 				}
-				txtUserName.setText("");
+				//txtUserName.setText("");
 				// pf.setText("");
 			}
-		});*/
+		});
 
 
-btnadd.setOnAction((e -> {
-	Emprunt emprunt = new Emprunt(0, 0, null, null, 0);
-	
-	view.EmpruntView(border , emprunt);
-	boolean test = gEmprunt.addEmprunt(emprunt);
 
-	
-
-}));
-
-		root.setCenter(border);
+		root.setCenter(gridPane);
 	}
 
 	public void ajouterEmprunt() {
