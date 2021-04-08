@@ -2,6 +2,7 @@ package controller;
 
 import java.util.ArrayList;
 
+
 import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
@@ -30,6 +31,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import model.DAOEtudiant;
+import view.View;
 
 public class Controller {
 	static GererNouveauEmprunt gEmprunt = new GererNouveauEmprunt(new ImpDAOGererNouveauEmp());
@@ -38,7 +40,7 @@ public class Controller {
 	static boolean test = true;
 	static int val;
 	static Scanner sc = new Scanner(System.in);
-
+View view= new View();
 	public Controller(BorderPane root) {
 		this.root = root;
 	}
@@ -162,7 +164,10 @@ public class Controller {
 		gridPane.setHgap(10);
 		gridPane.setVgap(10);
 
-		// Implementing Nodes for GridPane
+		
+BorderPane border =new BorderPane();
+Button btnadd = new Button("Ajouter");
+// Implementing Nodes for GridPane
 		/*
 		 * Label lblUserName = new Label("CodeEtudiant"); final TextField
 		 * txtUserName = new TextField(); // Label lblPassword = new
@@ -241,7 +246,18 @@ Emprunt emprunt =new Emprunt(txtidExemp, txtidExemp, txtUserName, dateR, 0);
 			}
 		});*/
 
-		root.setCenter(gridPane);
+
+btnadd.setOnAction((e -> {
+	Emprunt emprunt = new Emprunt(0, 0, null, null, 0);
+	
+	view.EmpruntView(border , emprunt);
+	boolean test = gEmprunt.addEmprunt(emprunt);
+
+	
+
+}));
+
+		root.setCenter(border);
 	}
 
 	public void ajouterEmprunt() {
