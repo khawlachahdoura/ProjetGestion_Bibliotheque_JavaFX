@@ -5,7 +5,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 import java.util.Scanner;
 
@@ -31,6 +31,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.effect.Reflection;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import model.DAOEtudiant;
@@ -191,16 +192,26 @@ Button btnadd = new Button("Ajouter");
 
 		gridPane.add(nom, 0, 0);
 
+		//Date d = new Date();
 		// Implementing Nodes for GridPane
-		
+		//java.sql.Date sql= new java.sql.Date(d .getTime());
 		Label dateemp = new Label("DateEmprunt");
+		
 		final DatePicker datePicker = new DatePicker(); 
-        datePicker.setValue(LocalDate.MIN);
+       datePicker.getValue();
 		
 
 		Label dateR = new Label("Date de retour");
+		/* DatePicker datePicker_r = new DatePicker();
+	        datePicker.setDate(LocalDate.of(2016, 7, 25));
+	        datePicker.setShowWeekNumbers(true);
+	 
+	       
+	        root.getChildren().add(datePicker);
+	        root.setPadding(new Insets(10));*/
+	 
 		final DatePicker datePicker_r = new DatePicker(); 
-		datePicker_r.setValue(LocalDate.MIN);
+		datePicker_r.getValue();
 		
 		Label idExemplaire = new Label("codeExemplaire");
 		final TextField txtidExemp = new TextField();
@@ -216,7 +227,7 @@ Button btnadd = new Button("Ajouter");
 		gridPane.add(lblMessage, 1, 5);
 		// Adding Nodes to GridPane layout
 		gridPane.add(dateemp, 0, 1);
-		gridPane.add(datePicker, 1, 1);
+		gridPane.add(datePicker, 1,1);
 		// gridPane.add(lblPassword, 0, 1);
 
 		gridPane.add(dateR, 0, 2);
@@ -239,10 +250,12 @@ Button btnadd = new Button("Ajouter");
 				//String checkUser = txtUserName.getText().toString();
 				int idex=txtidExemp.getLength();
 				int idetd=txtidEtudiant.getLength();
-				
-				java.sql.Date date=(java.sql.Date) Date.class.cast(datePicker);
-				java.sql.Date date1=(java.sql.Date) Date.class.cast(datePicker_r);
-				Emprunt emprunt = new Emprunt(idex, idetd, date, date1, 0);
+				LocalDate date = datePicker.getValue();
+			 //DatePicker date= datePicker;
+				LocalDate date1 = datePicker.getValue();
+				Date date2 = Date.valueOf(date );
+				Date date3 = Date.valueOf(date1 );
+				Emprunt emprunt = new Emprunt(idex, idetd, date2, date3, 0);
 				boolean test = gEmprunt.addEmprunt(emprunt);
 				if (test) {
 					lblMessage.setText("Entrer");
@@ -250,7 +263,7 @@ Button btnadd = new Button("Ajouter");
 					// c1.creerTableViewEmprunt();
 
 				} else {
-					lblMessage.setText("Incorrect user or pw.");
+					lblMessage.setText("il n' y pas un exemplaire pour cette livre pour l'emprunte ");
 					lblMessage.setTextFill(Color.RED);
 				}
 				//txtUserName.setText("");
