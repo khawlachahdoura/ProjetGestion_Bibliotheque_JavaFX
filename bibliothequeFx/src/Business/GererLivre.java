@@ -1,7 +1,8 @@
 package Business;
 
 import Entities.Livre;
-import ImpDAO.ImpDAOGererLivre;
+
+import ImpDAO1.ImpDAOGererLivre;
 import IserviceDAO.IDAOGererLivre;
 
 public class GererLivre {

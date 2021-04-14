@@ -14,8 +14,8 @@ import Business.GererNouveauEmprunt;
 import Entities.Emprunt;
 import Entities.Etudiant;
 import Entities.Livre;
-import ImpDAO.ImpDAOGererLivre;
-import ImpDAO.ImpDAOGererNouveauEmp;
+import ImpDAO1.ImpDAOGererLivre;
+import ImpDAO1.ImpDAOGererNouveauEmp;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -57,9 +57,9 @@ View view= new View();
 		l = DAOEtudiant.affichelist2();
 
 		TableColumn<Livre, Integer> ISBN = new TableColumn<Livre, Integer>("ISBN");
-		TableColumn<Livre, String> titre = new TableColumn<Livre, String>("titre");
-		TableColumn<Livre, String> auteur = new TableColumn<Livre, String>("auteur");
-		TableColumn<Livre, String> theme = new TableColumn<Livre, String>("idExemplaire");
+		TableColumn<Livre, String> titre = new TableColumn<Livre, String>("Titre");
+		TableColumn<Livre, String> auteur = new TableColumn<Livre, String>("Theme");
+		TableColumn<Livre, String> theme = new TableColumn<Livre, String>("Auteur");
 
 		tableView.getColumns().addAll(ISBN, titre, auteur, theme);
 
@@ -171,30 +171,11 @@ View view= new View();
 		
 BorderPane border =new BorderPane();
 Button btnadd = new Button("Ajouter");
-// Implementing Nodes for GridPane
-		/*
-		 * Label lblUserName = new Label("CodeEtudiant"); final TextField
-		 * txtUserName = new TextField(); // Label lblPassword = new
-		 * Label("Password");
-		 * 
-		 * Button btnLogin = new Button("Vérifier"); final Label lblMessage =
-		 * new Label();
-		 * 
-		 * //Adding Nodes to GridPane layout gridPane.add(lblUserName, 0, 0);
-		 * gridPane.add(txtUserName, 1, 0); // gridPane.add(lblPassword, 0, 1);
-		 * 
-		 * gridPane.add(btnLogin, 2, 1); gridPane.add(lblMessage, 1, 2);
-		 * 
-		 * //Reflection for gridPane Reflection r = new Reflection();
-		 * r.setFraction(0.7f); gridPane.setEffect(r);
-		 */
+
 		Label nom = new Label("Ajouter un Emprunt :");
 
 		gridPane.add(nom, 0, 0);
 
-		//Date d = new Date();
-		// Implementing Nodes for GridPane
-		//java.sql.Date sql= new java.sql.Date(d .getTime());
 		Label dateemp = new Label("DateEmprunt");
 		
 		final DatePicker datePicker = new DatePicker(); 
@@ -202,13 +183,7 @@ Button btnadd = new Button("Ajouter");
 		
 
 		Label dateR = new Label("Date de retour");
-		/* DatePicker datePicker_r = new DatePicker();
-	        datePicker.setDate(LocalDate.of(2016, 7, 25));
-	        datePicker.setShowWeekNumbers(true);
-	 
-	       
-	        root.getChildren().add(datePicker);
-	        root.setPadding(new Insets(10));*/
+		
 	 
 		final DatePicker datePicker_r = new DatePicker(); 
 		datePicker_r.getValue();
@@ -220,15 +195,15 @@ Button btnadd = new Button("Ajouter");
 		final TextField txtidEtudiant = new TextField();
 	
 
-		Button btnLogin = new Button("Vérifier");
+		Button btnVerifier = new Button("Vérifier");
 		final Label lblMessage = new Label();
 
-		gridPane.add(btnLogin, 0, 5);
+		gridPane.add(btnVerifier, 0, 5);
 		gridPane.add(lblMessage, 1, 5);
-		// Adding Nodes to GridPane layout
+		
 		gridPane.add(dateemp, 0, 1);
 		gridPane.add(datePicker, 1,1);
-		// gridPane.add(lblPassword, 0, 1);
+		
 
 		gridPane.add(dateR, 0, 2);
 		gridPane.add(datePicker_r, 1, 2);
@@ -236,20 +211,14 @@ Button btnadd = new Button("Ajouter");
 		gridPane.add(txtidExemp, 1, 3);
 		gridPane.add(idEtudiant, 0, 4);
 		gridPane.add(txtidEtudiant, 1, 4);
-		// DropShadow effect
-		DropShadow dropShadow = new DropShadow();
-		dropShadow.setOffsetX(5);
-		dropShadow.setOffsetY(5);
-		String user = "123456";
-		String pw = "";
-
-		btnLogin.setOnAction(new EventHandler<ActionEvent>() {
+		
+				btnVerifier.setOnAction(new EventHandler<ActionEvent>() {
 
 			public void handle(ActionEvent event) {
 
 				//String checkUser = txtUserName.getText().toString();
-				int idex=txtidExemp.getLength();
-				int idetd=txtidEtudiant.getLength();
+				int idex=Integer.parseInt(txtidExemp.getText());
+				int idetd= Integer.parseInt(txtidEtudiant.getText());
 				LocalDate date = datePicker.getValue();
 			 //DatePicker date= datePicker;
 				LocalDate date1 = datePicker.getValue();
@@ -263,7 +232,87 @@ Button btnadd = new Button("Ajouter");
 					// c1.creerTableViewEmprunt();
 
 				} else {
-					lblMessage.setText("il n' y pas un exemplaire pour cette livre pour l'emprunte ");
+					lblMessage.setText("il n' y pas un exemplaire pour ce livre pour l'emprunte ");
+					lblMessage.setTextFill(Color.RED);
+				}
+				//txtUserName.setText("");
+				// pf.setText("");
+			}
+		});
+
+
+
+		root.setCenter(gridPane);
+	}
+	
+	public void ajoutLivre() {
+
+
+		GridPane gridPane = new GridPane();
+
+		gridPane.setPadding(new Insets(70, 70, 70, 70));
+		gridPane.setHgap(10);
+		gridPane.setVgap(10);
+
+		
+BorderPane border =new BorderPane();
+Button btnadd = new Button("Ajouter");
+
+		Label nom = new Label("Ajouter un livre :");
+
+		gridPane.add(nom, 0, 0);
+
+		Label isbn = new Label("ISBN : ");
+		
+		final TextField txtisbn = new TextField();
+		
+
+		Label titre = new Label("Titre : ");
+		final TextField txttitre = new TextField();
+		
+		Label theme = new Label("Theme : ");
+		final TextField txttheme = new TextField();
+		
+		Label auteur = new Label("Auteur : ");
+		final TextField txtauteur = new TextField();
+	
+
+		Button btnajouter = new Button("Ajouter");
+		final Label lblMessage = new Label();
+
+		gridPane.add(btnajouter, 0, 5);
+		gridPane.add(lblMessage, 1, 5);
+		
+		gridPane.add(isbn, 0, 1);
+		gridPane.add(txtisbn, 1,1);
+		gridPane.add(titre, 0, 2);
+		gridPane.add(txttitre, 1, 2);
+		gridPane.add(theme, 0, 3);
+		gridPane.add(txttheme, 1, 4);
+		gridPane.add(auteur, 0, 4);
+		gridPane.add(txtauteur, 1, 3);
+		
+		btnajouter.setOnAction(new EventHandler<ActionEvent>() {
+
+			public void handle(ActionEvent event) {
+
+				//String checkUser = txtUserName.getText().toString();
+				int isbn=Integer.parseInt(txtisbn.getText());
+				String titre= txttitre.getText();
+				String theme= txttheme.getText();
+				String auteur= txtauteur.getText();
+				
+				
+				Livre livre = new Livre(isbn, titre, theme, auteur);
+
+				boolean test = gLivre.addLivre(livre);
+				if (test) {
+					lblMessage.setText("Entrer");
+					lblMessage.setTextFill(Color.GREEN);
+					creerTableViewLivre();
+
+				} else {
+					lblMessage.setText("il n' y pas un exemplaire pour ce livre pour l'emprunte ");
 					lblMessage.setTextFill(Color.RED);
 				}
 				//txtUserName.setText("");
@@ -315,41 +364,10 @@ Button btnadd = new Button("Ajouter");
 		gridPane.add(txtidExemp, 1, 3);
 		gridPane.add(idEtudiant, 4, 1);
 		gridPane.add(txtidEtudiant, 1, 4);
-		/*
-		 * System.out.println("Veuillez saisir DateEmprunt (YYYY-MM-JJ) :");
-		 * String vdate_E = sc.nextLine(); Date date_E = Date.valueOf(vdate_E);
-		 * 
-		 * System.out.println("Veuillez saisir Date de retour (YYYY-MM-JJ):");
-		 * String vdate_RE = sc.nextLine(); Date date_RE =
-		 * Date.valueOf(vdate_RE);
-		 * 
-		 * while(!comparDate(date_E,date_RE)) { ajouterEmprunt(); }
-		 * 
-		 * System.out.println("Veuillez saisir idExemplaire :"); int idEtudiant
-		 * = Integer.parseInt(sc.nextLine());
-		 * 
-		 * System.out.println("Veuillez saisir idEtudiant :"); int idExemplaire
-		 * = Integer.parseInt(sc.nextLine());
-		 * 
-		 * Emprunt emprunt = new Emprunt(idExemplaire, idEtudiant, date_E,
-		 * date_RE,0);
-		 * 
-		 * boolean test = gEmprunt.addEmprunt(emprunt); if (test) {
-		 * System.out.println("Livre emprunt avec sucées"); } else {
-		 * System.out.println("Il y a un probleme lors d'ajouter d'un emprunt:"
-		 * + emprunt.getIdEmprunt()); }
-		 */
+		
 
 	}
 
-	/*
-	 * private static boolean comparDate(Date date_E, Date date_RE) {
-	 * if(date_E.compareTo(date_RE) > 0) {
-	 * System.out.println("date_E  apres date_RE"); return false; } else
-	 * if(date_E.compareTo(date_RE) == 0) {
-	 * System.out.println(" date_E=date_RE "); return false; } return true;
-	 * 
-	 * }
-	 */
+	
 
 }

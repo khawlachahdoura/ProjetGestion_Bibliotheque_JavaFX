@@ -3,7 +3,7 @@ package Business;
 import java.sql.Date;
 
 import Entities.Emprunt;
-import ImpDAO.ImpDAOGererNouveauEmp;
+import ImpDAO1.ImpDAOGererNouveauEmp;
 import IserviceDAO.IDAOGererNouveauEmp;
 
 public class GererNouveauEmprunt {

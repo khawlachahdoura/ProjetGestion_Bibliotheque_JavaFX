@@ -6,7 +6,7 @@ import org.junit.Test;
 
 import com.sun.javafx.scene.control.skin.ComboBoxPopupControl.FakeFocusTextField;
 
-import ImpDAO.ImpDAOGererNouveauEmp;
+import ImpDAO1.ImpDAOGererNouveauEmp;
 import IserviceDAO.IDAOGererNouveauEmp;
 import junit.framework.Assert;
 

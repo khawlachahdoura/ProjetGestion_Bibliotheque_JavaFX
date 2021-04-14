@@ -61,6 +61,11 @@ public class Main extends Application {
 			
 		}));
 		
+		ajoutlivre.setOnAction((e->{
+			c1.ajoutLivre();
+			
+		}));
+		
 		listelivre.setOnAction((e->{
 			c1.creerTableViewLivre();
 			
