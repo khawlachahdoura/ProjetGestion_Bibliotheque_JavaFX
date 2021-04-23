@@ -18,7 +18,7 @@ public class GererLivreTest {
 		DaoGererLivreMock idoGL = new DaoGererLivreMock();
 		MaGererLivre GL = new MaGererLivre(idoGL);
 		boolean result=GL.addLivre(livre);
-		Assert.assertFalse(result);
+		assertFalse(result);
 		
 	}
 

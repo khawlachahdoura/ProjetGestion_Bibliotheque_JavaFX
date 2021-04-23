@@ -3,6 +3,7 @@ package ImpDAO1;
 import java.sql.*;
 
 import Business.mySingleton;
+import Entities.Exemplaire;
 import Entities.Livre;
 import IserviceDAO.IDAOGererLivre;
 
@@ -36,6 +37,32 @@ public class ImpDAOGererLivre implements IDAOGererLivre {
 		catch (SQLException e) {
 
 			System.out.println("add livre :" + e.getMessage());
+
+		}
+
+		return false;
+
+	}
+	public boolean ajouterexemplaire(Exemplaire livre ) {
+
+		try {
+
+			inserLivre = conn.prepareStatement("INSERT INTO `exemplaire` (`idExemplaire`, `ISBN`, `Titre`, `Theme`, `Auteur`, `code`)  VALUES ( NULL , ?, ?, ?, ?, ? )");
+
+			inserLivre.setInt(1, livre.getISBN());
+
+			inserLivre.setString(2, livre.getTitre());
+			inserLivre.setString(3, livre.getTheme());
+
+			inserLivre.setString(4, livre.getAuteur());
+			inserLivre.setInt(5, livre.getCodeExemplaire());
+			inserLivre.executeUpdate();
+			return true;
+		}
+
+		catch (SQLException e) {
+
+			System.out.println("add exemplaire :" + e.getMessage());
 
 		}
 

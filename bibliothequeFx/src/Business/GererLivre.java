@@ -1,5 +1,6 @@
 package Business;
 
+import Entities.Exemplaire;
 import Entities.Livre;
 
 import ImpDAO1.ImpDAOGererLivre;
@@ -21,6 +22,15 @@ public class GererLivre {
 	public boolean addLivre(Livre livre) {
 
 		if (iDaoGererLivre.ajouter(livre)) {
+			return true;
+		}
+		return false;
+
+	}
+
+	public boolean ajouterexemplaire(Exemplaire exemplaire) {
+
+		if ((iDaoGererLivre).ajouterexemplaire(exemplaire)) {
 			return true;
 		}
 		return false;

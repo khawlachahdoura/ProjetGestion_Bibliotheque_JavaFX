@@ -13,6 +13,7 @@ import Business.GererLivre;
 import Business.GererNouveauEmprunt;
 import Entities.Emprunt;
 import Entities.Etudiant;
+import Entities.Exemplaire;
 import Entities.Livre;
 import ImpDAO1.ImpDAOGererLivre;
 import ImpDAO1.ImpDAOGererNouveauEmp;
@@ -34,6 +35,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import model.DAOEtudiant;
 import view.View;
 
@@ -86,6 +88,7 @@ View view= new View();
 		TableColumn<Emprunt, Integer> idExemplaire = new TableColumn<Emprunt, Integer>("idExemplaire");
 		TableColumn<Emprunt, Integer> idEtudiant = new TableColumn<Emprunt, Integer>("idEtudiant");
 		TableColumn<Emprunt, Integer> etat = new TableColumn<Emprunt, Integer>("etat");
+		TableColumn<Button, String> action = new TableColumn<Button, String>("Action");
 
 		tableView.getColumns().addAll(idExemplaire, idEtudiant, DateEmprunt, DateRetour, etat);
 
@@ -95,6 +98,7 @@ View view= new View();
 		idExemplaire.setCellValueFactory(new PropertyValueFactory<>("idExemplaire"));
 		idEtudiant.setCellValueFactory(new PropertyValueFactory<>("idEtudiant"));
 		etat.setCellValueFactory(new PropertyValueFactory<>("etat"));
+		
 		ObservableList<Emprunt> list = getListEmprunt();
 		tableView.setItems(list);
 		root.setCenter(tableView);
@@ -173,28 +177,34 @@ BorderPane border =new BorderPane();
 Button btnadd = new Button("Ajouter");
 
 		Label nom = new Label("Ajouter un Emprunt :");
-
+		nom.setStyle("-fx-alignment: CENTER;-fx-focus-color: violet;"); 
+		nom.setFont(new Font("Arial", 25));
+		nom.setTextFill(Color.VIOLET);
 		gridPane.add(nom, 0, 0);
 
-		Label dateemp = new Label("DateEmprunt");
+		Label dateemp = new Label("Date Emprunt : ");
 		
 		final DatePicker datePicker = new DatePicker(); 
        datePicker.getValue();
-		
+       dateemp.setStyle("-fx-alignment: CENTER;"); 
+       dateemp.setFont(new Font("Arial", 15));
 
-		Label dateR = new Label("Date de retour");
-		
+		Label dateR = new Label("Date de retour : ");
+		dateR.setStyle("-fx-alignment: CENTER;"); 
+		dateR.setFont(new Font("Arial", 15));
 	 
 		final DatePicker datePicker_r = new DatePicker(); 
 		datePicker_r.getValue();
 		
-		Label idExemplaire = new Label("codeExemplaire");
+		Label idExemplaire = new Label("Code Exemplaire : ");
 		final TextField txtidExemp = new TextField();
-		
-		Label idEtudiant = new Label("codeEtudiant");
+		idExemplaire.setStyle("-fx-alignment: CENTER;"); 
+		idExemplaire.setFont(new Font("Arial", 15));
+		Label idEtudiant = new Label("Code Etudiant : ");
 		final TextField txtidEtudiant = new TextField();
 	
-
+		idEtudiant.setStyle("-fx-alignment: CENTER;"); 
+		idEtudiant.setFont(new Font("Arial", 15));
 		Button btnVerifier = new Button("Vérifier");
 		final Label lblMessage = new Label();
 
@@ -244,7 +254,7 @@ Button btnadd = new Button("Ajouter");
 
 		root.setCenter(gridPane);
 	}
-	
+	Button btnaddL = new Button("Ajouter");
 	public void ajoutLivre() {
 
 
@@ -255,11 +265,14 @@ Button btnadd = new Button("Ajouter");
 		gridPane.setVgap(10);
 
 		
-BorderPane border =new BorderPane();
-Button btnadd = new Button("Ajouter");
+       BorderPane border =new BorderPane();
+       Button btnadd = new Button("Ajouter");
+       Button btnaddexemp = new Button("Ajouter un exemplaire");
 
 		Label nom = new Label("Ajouter un livre :");
-
+		nom.setStyle("-fx-alignment: CENTER;-fx-focus-color: violet;"); 
+		nom.setFont(new Font("Arial", 20));
+		nom.setTextFill(Color.VIOLET);
 		gridPane.add(nom, 0, 0);
 
 		Label isbn = new Label("ISBN : ");
@@ -267,20 +280,40 @@ Button btnadd = new Button("Ajouter");
 		final TextField txtisbn = new TextField();
 		
 
+		isbn.setStyle("-fx-alignment: CENTER;"); 
+		isbn.setFont(new Font("Arial", 15));
 		Label titre = new Label("Titre : ");
 		final TextField txttitre = new TextField();
-		
+		titre.setStyle("-fx-alignment: CENTER;"); 
+		titre.setFont(new Font("Arial", 15));
 		Label theme = new Label("Theme : ");
 		final TextField txttheme = new TextField();
 		
+		theme.setStyle("-fx-alignment: CENTER;"); 
+		theme.setFont(new Font("Arial", 15));
 		Label auteur = new Label("Auteur : ");
 		final TextField txtauteur = new TextField();
-	
+		auteur.setStyle("-fx-alignment: CENTER;"); 
+		auteur.setFont(new Font("Arial", 15));
+		Label codeexemplaire = new Label("Code exemplaire : ");
+		final TextField txtcode = new TextField();
+		codeexemplaire.setStyle("-fx-alignment: CENTER;"); 
+		codeexemplaire.setFont(new Font("Arial", 15));
 
 		Button btnajouter = new Button("Ajouter");
 		final Label lblMessage = new Label();
-
+		Label ajouterexp = new Label("Ajouter un exemplaire pour ce livre :");
+		ajouterexp.setStyle("-fx-alignment: CENTER;-fx-focus-color: violet;"); 
+		ajouterexp.setFont(new Font("Arial", 20));
+		ajouterexp.setTextFill(Color.VIOLET);
+		final Label lblMessage1 = new Label();
+		gridPane.add(ajouterexp, 0, 6);
+		gridPane.add(lblMessage1, 1, 8);
+		gridPane.add(codeexemplaire, 0, 7);
+		gridPane.add(txtcode, 1, 7);
+		
 		gridPane.add(btnajouter, 0, 5);
+		gridPane.add(btnaddexemp, 0,8);
 		gridPane.add(lblMessage, 1, 5);
 		
 		gridPane.add(isbn, 0, 1);
@@ -307,21 +340,43 @@ Button btnadd = new Button("Ajouter");
 
 				boolean test = gLivre.addLivre(livre);
 				if (test) {
-					lblMessage.setText("Entrer");
+					lblMessage.setText("livre ajouté avec succé");
 					lblMessage.setTextFill(Color.GREEN);
-					creerTableViewLivre();
+					//creerTableViewLivre();
 
 				} else {
-					lblMessage.setText("il n' y pas un exemplaire pour ce livre pour l'emprunte ");
+					lblMessage.setText("Erreur ");
 					lblMessage.setTextFill(Color.RED);
 				}
-				//txtUserName.setText("");
-				// pf.setText("");
+				
 			}
 		});
 
+		btnaddexemp.setOnAction(new EventHandler<ActionEvent>() {
+			
+			public void handle(ActionEvent event) {
 
+				int isbn=Integer.parseInt(txtisbn.getText());
+				String titre= txttitre.getText();
+				String theme= txttheme.getText();
+				String auteur= txtauteur.getText();
+				int code=Integer.parseInt(txtcode.getText());
+				
+				Livre livre = new Livre(isbn, titre, theme, auteur);
+Exemplaire exemplaire= new Exemplaire(isbn,titre,theme,auteur,code);
+				boolean test = gLivre.ajouterexemplaire(exemplaire);
+				if (test) {
+					lblMessage.setText("exemplaire ajouté avec succé");
+					lblMessage.setTextFill(Color.GREEN);
+					//creerTableViewLivre();
 
+				} else {
+					lblMessage1.setText("erreur ");
+					lblMessage1.setTextFill(Color.RED);
+				}
+				
+			}
+		});
 		root.setCenter(gridPane);
 	}
 

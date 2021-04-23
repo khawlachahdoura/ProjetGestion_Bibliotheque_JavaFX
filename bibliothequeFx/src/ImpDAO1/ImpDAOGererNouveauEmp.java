@@ -76,6 +76,7 @@ public class ImpDAOGererNouveauEmp implements IDAOGererNouveauEmp {
 				return true;
 			}else {
 				System.out.println(" il y a une erreur!!!");
+				System.out.println(nbreExemplaireDispo);
 			}
 			}
 			
@@ -105,20 +106,32 @@ public class ImpDAOGererNouveauEmp implements IDAOGererNouveauEmp {
 			int isbn=0;
 			while (rs.next()) {
 				 isbn = rs.getInt("ISBN");
-			isbn++;
+			//isbn++;
 
 			}
-			
-				String requete1 = "SELECT idExemplaire FROM exemplaire  WHERE exemplaire.`ISBN` = " + isbn;
-			 
-				ArrayList<Integer> listIDExemplaire = new ArrayList<Integer>();
+			if(isbn!=0) {
+				String requete1 = "SELECT ISBN FROM exemplaire  WHERE exemplaire.`ISBN` = " + isbn;
+				
 				ps = conn.createStatement();
 				rs = ps.executeQuery(requete1);
 				while (rs.next()) {
 
-					listIDExemplaire.add(rs.getInt("idExemplaire"));
+					nbreExemplaire++;
 				}
-				
+				System.out.println(nbreExemplaire+ " " +  idExemplaire);
+			} else {
+				System.out.println("il n' y pas un livre avec cette ISBN ");
+			}
+				/*String requete1 = "SELECT idExemplaire FROM exemplaire  WHERE exemplaire.`ISBN` = " + isbn;
+			 
+				//ArrayList<Integer> listIDExemplaire = new ArrayList<Integer>();
+				ps = conn.createStatement();
+				rs = ps.executeQuery(requete1);
+				while (rs.next()) {
+
+				rs.getInt("idExemplaire");
+				}
+				*/
 				 
 			 		
 			

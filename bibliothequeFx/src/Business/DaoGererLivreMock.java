@@ -1,5 +1,6 @@
 package Business;
 
+import Entities.Exemplaire;
 import Entities.Livre;
 import IserviceDAO.IDAOGererLivre;
 
@@ -37,6 +38,14 @@ public class DaoGererLivreMock implements IDAOGererLivre{
 
 	@Override
 	public boolean updateTitre(String arg0, int arg1) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	
+
+	@Override
+	public boolean ajouterexemplaire(Exemplaire exemplaire) {
 		// TODO Auto-generated method stub
 		return false;
 	}
