@@ -1,0 +1,15 @@
+.scene {
+    -fx-font: 12pt "Arial";
+}
+.title-label {
+    -fx-font-size: 24pt;
+    -fx-font-weight: bold;
+    -fx-text-fill: red;
+}
+.level-label {
+    -fx-font-size: 15pt;
+    -fx-text-fill: green;
+}
+.bottom-hbox {
+    -fx-spacing: 6;
+}

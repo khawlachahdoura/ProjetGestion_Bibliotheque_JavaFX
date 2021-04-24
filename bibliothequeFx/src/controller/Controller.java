@@ -46,7 +46,7 @@ public class Controller {
 	static boolean test = true;
 	static int val;
 	static Scanner sc = new Scanner(System.in);
-View view= new View();
+
 	public Controller(BorderPane root) {
 		this.root = root;
 	}
@@ -245,8 +245,7 @@ Button btnadd = new Button("Ajouter");
 					lblMessage.setText("il n' y pas un exemplaire pour ce livre pour l'emprunte ");
 					lblMessage.setTextFill(Color.RED);
 				}
-				//txtUserName.setText("");
-				// pf.setText("");
+				
 			}
 		});
 
