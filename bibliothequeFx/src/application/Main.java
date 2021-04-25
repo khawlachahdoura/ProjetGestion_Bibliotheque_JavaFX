@@ -37,7 +37,7 @@ public class Main extends Application {
 	GererLivre gLivre = new GererLivre(new ImpDAOGererLivre());
 	@Override
 	public void start(Stage primaryStage) {
-		 primaryStage.setTitle("Gestion Bibliothèque");
+		 primaryStage.setTitle("Gestion BibliothÃ¨que");
 		 
 		try {
 			//Parent root = FXMLLoader.load(getClass().getResource("vue.fxml"));
@@ -57,7 +57,7 @@ public class Main extends Application {
 	
 	Controller c1=new Controller(root);
 public void Accueil(){
-	//Image image = new Image("images:téléchargement(1).png");
+	//Image image = new Image("images:tÃ©lÃ©chargement(1).png");
 		ImageView imageView=new ImageView();
 		//imageView.setImage(image);
 		BorderPane bord =new BorderPane();
@@ -116,13 +116,13 @@ public void Accueil(){
 		bord.setRight(vBox);
 		
 		root.setCenter(bord);
-		
+		System.out.println("Bienvenue ");
 	}
 	
 	
 	public void menu(){
 		Menu fichier =new Menu("Accueil");
-		MenuItem Accueil=new MenuItem("Retour à la page d'accueil");
+		MenuItem Accueil=new MenuItem("Retour Ã  la page d'accueil");
 		
 		Menu Fichier =new Menu("Fichier");
 		MenuItem editer=new MenuItem("Editer");
@@ -146,7 +146,7 @@ public void Accueil(){
 		MenuBar menuBar=new MenuBar();
 		menuBar.getMenus().addAll(fichier,Fichier,help);
 		root.setTop(menuBar);
-		System.out.println("Menu affiché avec succée");
+		System.out.println("Menu affichÃ© avec succÃ©e");
 	}
 		
 	
