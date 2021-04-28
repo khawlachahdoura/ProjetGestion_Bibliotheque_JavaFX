@@ -248,7 +248,9 @@ public void Accueil(){
 		MenuBar menuBar = new MenuBar();
 		menuBar.getMenus().addAll(fichier, Fichier, help);
 		root.setTop(menuBar);
-		System.out.println("Menu affiché avec succée");
+
+		System.out.println("Bienvenue dans notre application");
+
 	}
 
 	public static void main(String[] args) {
