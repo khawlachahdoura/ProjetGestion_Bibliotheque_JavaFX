@@ -11,6 +11,8 @@ import java.sql.Date;
 
 import Business.mySingleton;
 import Entities.Emprunt;
+import Entities.Etudiant;
+import Entities.Livre;
 import IserviceDAO.IDAOGererNouveauEmp;
 
 public class ImpDAOGererNouveauEmp implements IDAOGererNouveauEmp {
@@ -20,9 +22,116 @@ public class ImpDAOGererNouveauEmp implements IDAOGererNouveauEmp {
 	private int nbreExemplaireDispo=0;
 
 	private static ResultSet rs = null;
-	private mySingleton mySing = mySingleton.getInstance();
+	private static mySingleton mySing = mySingleton.getInstance();
 
-	private Connection conn = mySing.getConnection();
+	private static Connection conn = mySing.getConnection();
+	
+	public static ArrayList affichelist1() {
+		ArrayList<Etudiant> etudiant =new ArrayList();
+		//Connection conn= myConn();
+		Statement ps= null;
+		ResultSet rs = null;
+		String serveurBD="jdbc:mysql://127.0.0.1:3306/bibliotheque?autoReconnect=true&useSSL=false";
+		String login="root";
+		String motPasse="";
+		try {
+			
+			String requete="select * from etudiant";
+			Statement pStatement =(PreparedStatement)conn.prepareStatement(requete);
+			ps = (Statement) conn.createStatement();
+			 rs = pStatement.executeQuery(requete);
+			while (rs.next()) {
+				int id= (int) rs.getLong("idEtudiant");
+				int codeEtudiant= (int) rs.getLong("codeEtudiant");
+				 String nom = rs.getString("nom");
+				 String prenom = rs.getString("prenom");
+				 String groupe=rs.getString("groupe");
+				
+				Etudiant E1 = new Etudiant(id,codeEtudiant,nom,prenom,groupe);
+				etudiant.add(E1);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("Execption");
+		}
+		
+		return etudiant;
+	}
+	
+	public static ArrayList affichelist2() {
+		ArrayList<Emprunt> emprunts =new ArrayList();
+		//Connection conn= myConn();
+		Statement ps= null;
+		ResultSet rs = null;
+		String serveurBD="jdbc:mysql://127.0.0.1:3306/bibliotheque?autoReconnect=true&useSSL=false";
+		String login="root";
+		String motPasse="";
+		try {
+			
+			String requete="select * from emprunt";
+			Statement pStatement =(PreparedStatement)conn.prepareStatement(requete);
+			ps = (Statement) conn.createStatement();
+			 rs = pStatement.executeQuery(requete);
+			while (rs.next()) {
+				int codeEtudiant= (int) rs.getLong("idEmpt");
+				 Date DateEmprunt = rs.getDate("DateEmprunt");
+				 Date DateRetour = rs.getDate("DateRetour");
+				 int idExemplaire= (int) rs.getLong("idExemplaire");
+				 int idEtudiant= (int) rs.getLong("idEtudiant");
+				 int etat= (int) rs.getLong("etat");
+				
+				Emprunt E1 = new Emprunt(idExemplaire,idEtudiant,DateEmprunt,DateRetour,etat);
+				emprunts.add(E1);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("Execption");
+		}
+		
+		return emprunts;
+	}
+	
+	public static ArrayList affichelist3() {
+		ArrayList<Livre> emprunts =new ArrayList();
+		//Connection conn= myConn();
+		Statement ps= null;
+		ResultSet rs = null;
+		String serveurBD="jdbc:mysql://127.0.0.1:3306/bibliotheque?autoReconnect=true&useSSL=false";
+		String login="root";
+		String motPasse="";
+		try {
+			
+			String requete="select * from livre";
+			Statement pStatement =(PreparedStatement)conn.prepareStatement(requete);
+			ps = (Statement) conn.createStatement();
+			 rs = pStatement.executeQuery(requete);
+			while (rs.next()) {
+				int ISBN= (int) rs.getLong("ISBN");
+				 String DateEmprunt = rs.getString("Titre");
+				 String DateRetour = rs.getString("Theme");
+				 String Auteur=  rs.getString("Auteur");
+				
+				
+				Livre E1 = new Livre(ISBN,DateEmprunt,DateRetour,Auteur);
+				emprunts.add(E1);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("Execption");
+		}
+		
+		return emprunts;
+	}
+	
+	
+	
+	
+	
+	
+	
 /*
 	@Override
 	public boolean ajouter(Emprunt emprunt) {
@@ -165,7 +274,7 @@ public class ImpDAOGererNouveauEmp implements IDAOGererNouveauEmp {
 	public boolean supprimer(int idEmprunt) {
 		try {
 
-			inserEmprunt = conn.prepareStatement("DDELETE FROM `emprunt` WHERE `emprunt`.`idEmpt`  = ?");
+			inserEmprunt = conn.prepareStatement("DELETE FROM `emprunt` WHERE `emprunt`.`idEmpt`  = ?");
 			 
 			inserEmprunt.setInt(1, idEmprunt);
 
