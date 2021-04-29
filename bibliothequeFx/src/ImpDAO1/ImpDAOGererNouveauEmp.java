@@ -41,13 +41,13 @@ public class ImpDAOGererNouveauEmp implements IDAOGererNouveauEmp {
 			ps = (Statement) conn.createStatement();
 			 rs = pStatement.executeQuery(requete);
 			while (rs.next()) {
-				int id= (int) rs.getLong("idEtudiant");
+				int idEtudiant=(int) rs.getLong("idEtudiant");
 				int codeEtudiant= (int) rs.getLong("codeEtudiant");
 				 String nom = rs.getString("nom");
 				 String prenom = rs.getString("prenom");
 				 String groupe=rs.getString("groupe");
 				
-				Etudiant E1 = new Etudiant(id,codeEtudiant,nom,prenom,groupe);
+				Etudiant E1 = new Etudiant(idEtudiant,codeEtudiant,nom,prenom,groupe);
 				etudiant.add(E1);
 			}
 
@@ -75,13 +75,14 @@ public class ImpDAOGererNouveauEmp implements IDAOGererNouveauEmp {
 			 rs = pStatement.executeQuery(requete);
 			while (rs.next()) {
 				int codeEtudiant= (int) rs.getLong("idEmpt");
+				
 				 Date DateEmprunt = rs.getDate("DateEmprunt");
 				 Date DateRetour = rs.getDate("DateRetour");
 				 int idExemplaire= (int) rs.getLong("idExemplaire");
 				 int idEtudiant= (int) rs.getLong("idEtudiant");
 				 int etat= (int) rs.getLong("etat");
-				
-				Emprunt E1 = new Emprunt(idExemplaire,idEtudiant,DateEmprunt,DateRetour,etat);
+				 
+				Emprunt E1 = new Emprunt(codeEtudiant,idExemplaire,idEtudiant,DateEmprunt,DateRetour,etat);
 				emprunts.add(E1);
 			}
 

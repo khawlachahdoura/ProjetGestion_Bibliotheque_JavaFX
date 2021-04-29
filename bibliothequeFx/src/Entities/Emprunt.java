@@ -13,9 +13,10 @@ public class Emprunt {
 	private Date date_E;
 	private Date date_RE;
 	private int etat;
-	public Emprunt(int idExemplaire, int idEtudiant, Date date_E, Date date_RE, int etat) {
+	public Emprunt(int idEmprunt,int idExemplaire, int idEtudiant, Date date_E, Date date_RE, int etat) {
  
 		super();
+		this.idEmprunt = idEmprunt;
 		this.idExemplaire = idExemplaire;
 		this.idEtudiant = idEtudiant;
 		this.date_E = date_E;

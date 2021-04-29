@@ -2,6 +2,12 @@ package Entities;
 
 public class Etudiant {
 	public int idEtudiant;
+	public int getIdEtudiant() {
+		return idEtudiant;
+	}
+	public void setIdEtudiant(int idEtudiant) {
+		this.idEtudiant = idEtudiant;
+	}
 	public int codeEtudiant;
 	public String nom;
 	public String prenom;
