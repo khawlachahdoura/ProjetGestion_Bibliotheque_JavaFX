@@ -12,6 +12,14 @@ public class MaGererLivre {
 		iDaoGererLivre = iGererLivre;
 
 	}
+	public boolean deleteLivre(int isbn) {
+
+		if (iDaoGererLivre.supprimer(isbn)) {
+			return true;
+		}
+		return false;
+
+	}
 	
 	public boolean addLivre(Livre livre) {
 
@@ -21,4 +29,6 @@ public class MaGererLivre {
 		return false;
 
 	}
+	
+
 }

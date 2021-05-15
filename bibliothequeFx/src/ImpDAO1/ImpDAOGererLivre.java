@@ -69,6 +69,48 @@ public class ImpDAOGererLivre implements IDAOGererLivre {
 		return false;
 
 	}
+	
+	/*private Livre rechercheLivre(String nom) {
+		Livre livre= new Livre(0, null, null, null);
+		String requete = "SELECT * FROM livre  WHERE livre.`titre` = " + nom;
+	
+		
+		try {
+		  
+			ps = conn.createStatement();
+			rs = ps.executeQuery(requete);
+			int isbn=0;
+			while (rs.next()) {
+				 isbn = rs.getInt("ISBN");
+			//isbn++;
+
+			}
+			if(isbn!=0) {
+				String requete1 = "SELECT ISBN FROM exemplaire  WHERE exemplaire.`ISBN` = " + isbn;
+				
+				ps = conn.createStatement();
+				rs = ps.executeQuery(requete1);
+				while (rs.next()) {
+
+					
+				}
+				//System.out.println(nbreExemplaire+ " " +  idExemplaire);
+			} else {
+				System.out.println("il n' y pas un livre avec cette ISBN ");
+			}
+				
+				 
+			 		
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		return  livre;
+		
+	}*/
 
 	@Override
 	public boolean supprimer(int isbn) {
