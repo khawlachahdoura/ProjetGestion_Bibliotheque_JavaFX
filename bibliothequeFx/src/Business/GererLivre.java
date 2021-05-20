@@ -27,6 +27,7 @@ public class GererLivre {
 		return false;
 
 	}
+	
 
 	public boolean ajouterexemplaire(Exemplaire exemplaire) {
 

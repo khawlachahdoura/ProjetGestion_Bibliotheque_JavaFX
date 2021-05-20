@@ -1,6 +1,7 @@
 package application;
 
 import java.io.File;
+
 import java.net.URISyntaxException;
 
 import Business.GererLivre;
@@ -15,7 +16,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.stage.Stage;
-import view.View;
+
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -38,7 +39,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
 public class Main extends Application {
-	View view = new View();
+
 	BorderPane root = new BorderPane();
 	GererLivre gLivre = new GererLivre(new ImpDAOGererLivre());
 
@@ -131,11 +132,13 @@ public void Accueil() throws URISyntaxException{
 		 listEtud.setMinSize(100, 100);
 		 listEtud.setStyle("-fx-focus-color: transparent;  -fx-background-insets: 0, 1, 2; -fx-background-radius: 5, 4, 3;");
 		 listEtud.setGraphic(imageView4);
+		 
 		 vBox.getChildren().add(ajoutliv);
 		 vBox.getChildren().add(ajoutemp);
 		 vBox.getChildren().add(listLiv);
 		 vBox.getChildren().add(listEmp);
 		 vBox.getChildren().add(listEtud);
+		 
 		
 
 		 listEmp.setOnAction((e->{
@@ -161,9 +164,11 @@ public void Accueil() throws URISyntaxException{
 				c1.creerTableViewEtudiant();
 				
 			}));
+			
+			
 			menu();
 		bord.setRight(vBox);
-		
+	
 		root.setCenter(bord);
 		System.out.println("Bienvenue ");
 	}
@@ -172,9 +177,12 @@ public void Accueil() throws URISyntaxException{
 	public void menu(){
 		Menu fichier =new Menu("Accueil");
 		MenuItem Accueil=new MenuItem("Retour à la page d'accueil");
-		MenuItem deconnecte=new MenuItem("Se Déconnecté");
+		MenuItem Recherchelivre=new MenuItem("Rechrecher un Livre");
+		MenuItem rechercheEmprunt=new MenuItem("Rechrecher un Emprunt");
+		MenuItem changerEtatEmp=new MenuItem("Changer l'état d'un emprunt");
 		
 		Menu Fichier =new Menu("Fichier");
+		MenuItem listexemplaire=new MenuItem("Liste des exemplaires");
 		MenuItem editerlv=new MenuItem("Editer Livre");
 		MenuItem editerEmp=new MenuItem("Editer Emprunt");
 		MenuItem suppLv=new MenuItem("Supprimer livre");
@@ -183,10 +191,9 @@ public void Accueil() throws URISyntaxException{
 		Menu help =new Menu("Aide");
 		
 		
-		Fichier.getItems().addAll(editerlv,editerEmp,suppLv,suppEmp);
-		fichier.getItems().addAll(Accueil);
+		Fichier.getItems().addAll(listexemplaire,editerlv,editerEmp,suppLv,suppEmp);
+		fichier.getItems().addAll(Accueil,Recherchelivre,rechercheEmprunt,changerEtatEmp);
 		Controller c1=new Controller(root);
-		
 		
 		
 		
@@ -200,8 +207,21 @@ public void Accueil() throws URISyntaxException{
 			}
 
 		}));
-		suppLv.setOnAction((e->{
-			c1.supprimerlivre();
+		listexemplaire.setOnAction((e->{
+			c1.creerTableViewExemplaire();
+
+		}));
+		rechercheEmprunt.setOnAction((e->{
+			c1.creerTableViewRechercheEmprunt();
+
+		}));
+		changerEtatEmp.setOnAction((e->{
+			c1.creerTableViewRechercheEmprunt();
+
+		}));
+		
+		Recherchelivre.setOnAction((e->{
+			c1.creerTableViewRechercheLivre();
 
 		}));
 		suppEmp.setOnAction((e->{

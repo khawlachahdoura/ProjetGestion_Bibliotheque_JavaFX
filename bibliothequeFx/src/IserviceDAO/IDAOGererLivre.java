@@ -1,5 +1,7 @@
 package IserviceDAO;
 
+import java.util.ArrayList;
+
 import Entities.*;
 
 public interface IDAOGererLivre {
@@ -10,4 +12,5 @@ public interface IDAOGererLivre {
 	boolean updateTheme(String theme, int aISBN);
 	boolean updateAuteur(String auteur, int aISBN);
 	boolean supprimer(int isbn );
+	
 }

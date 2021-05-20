@@ -12,6 +12,7 @@ import java.sql.Date;
 import Business.mySingleton;
 import Entities.Emprunt;
 import Entities.Etudiant;
+import Entities.Exemplaire;
 import Entities.Livre;
 import IserviceDAO.IDAOGererNouveauEmp;
 
@@ -116,6 +117,112 @@ public class ImpDAOGererNouveauEmp implements IDAOGererNouveauEmp {
 				
 				
 				Livre E1 = new Livre(ISBN,DateEmprunt,DateRetour,Auteur);
+				emprunts.add(E1);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("Execption");
+		}
+		
+		return emprunts;
+	}
+	//liste des exemplaires:
+	public static ArrayList affichelistExemplaires() {
+		ArrayList<Exemplaire> emprunts =new ArrayList();
+		//Connection conn= myConn();
+		Statement ps= null;
+		ResultSet rs = null;
+		String serveurBD="jdbc:mysql://127.0.0.1:3306/bibliotheque?autoReconnect=true&useSSL=false";
+		String login="root";
+		String motPasse="";
+		try {
+			
+			String requete="select * from exemplaire";
+			Statement pStatement =(PreparedStatement)conn.prepareStatement(requete);
+			ps = (Statement) conn.createStatement();
+			 rs = pStatement.executeQuery(requete);
+			while (rs.next()) {
+				
+				int ISBN= (int) rs.getLong("ISBN");
+				int id= (int) rs.getLong("idExemplaire");
+				 String DateEmprunt = rs.getString("Titre");
+				 String DateRetour = rs.getString("Theme");
+				 String Auteur=  rs.getString("Auteur");
+				 int code= (int) rs.getLong("code");
+				
+				 Exemplaire E1 = new Exemplaire(id,ISBN,DateEmprunt,DateRetour,Auteur, code);
+				emprunts.add(E1);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("Execption");
+		}
+		
+		return emprunts;
+	}
+	
+	//methode recherche livre
+	public static ArrayList affichelistrecherchelivre(int idlivre) {
+		ArrayList<Livre> livre =new ArrayList();
+		//Connection conn= myConn();
+		Statement ps= null;
+		ResultSet rs = null;
+		String serveurBD="jdbc:mysql://127.0.0.1:3306/bibliotheque?autoReconnect=true&useSSL=false";
+		String login="root";
+		String motPasse="";
+		try {
+			
+			String requete="select * from livre  WHERE livre.`ISBN` = " + idlivre;
+			Statement pStatement =(PreparedStatement)conn.prepareStatement(requete);
+			ps = (Statement) conn.createStatement();
+			 rs = pStatement.executeQuery(requete);
+			while (rs.next()) {
+				int ISBN= (int) rs.getLong("ISBN");
+				 String DateEmprunt = rs.getString("Titre");
+				 String DateRetour = rs.getString("Theme");
+				 String Auteur=  rs.getString("Auteur");
+				
+				
+				Livre E1 = new Livre(ISBN,DateEmprunt,DateRetour,Auteur);
+				livre.add(E1);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("Execption");
+		}
+		
+		return livre;
+	}
+	public static ArrayList affichelistrechercheEmprunt(int idEmp) {
+		ArrayList<Emprunt> emprunts =new ArrayList();
+		//Connection conn= myConn();
+		Statement ps= null;
+		ResultSet rs = null;
+		String serveurBD="jdbc:mysql://127.0.0.1:3306/bibliotheque?autoReconnect=true&useSSL=false";
+		String login="root";
+		String motPasse="";
+		try {
+			
+			
+			
+			
+			String requete="select * from emprunt WHERE emprunt.`idEmpt` = "+idEmp;
+			Statement pStatement =(PreparedStatement)conn.prepareStatement(requete);
+			ps = (Statement) conn.createStatement();
+			 rs = pStatement.executeQuery(requete);
+			while (rs.next()) {
+				int codeEtudiant= (int) rs.getLong("idEmpt");
+				
+				 Date DateEmprunt = rs.getDate("DateEmprunt");
+				 Date DateRetour = rs.getDate("DateRetour");
+				 int idExemplaire= (int) rs.getLong("idExemplaire");
+				 int idEtudiant= (int) rs.getLong("idEtudiant");
+				 int etat= (int) rs.getLong("etat");
+				 
+				Emprunt E1 = new Emprunt(codeEtudiant,idExemplaire,idEtudiant,DateEmprunt,DateRetour,etat);
 				emprunts.add(E1);
 			}
 

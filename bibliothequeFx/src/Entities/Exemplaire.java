@@ -3,22 +3,24 @@ package Entities;
 public class Exemplaire extends Livre {
 
 	
-public int codeExemplaire;
+public int code;
+public int idExemplaire;
 	
-	public Exemplaire(int iSBN, String titre, String auteur,String theme,int codeExemplaire ) {
+	public Exemplaire(int idExemplaire,int iSBN, String titre, String auteur,String theme,int code ) {
 		super(iSBN, titre, auteur,theme);
-		this.codeExemplaire=codeExemplaire;
+		this.code=code;
+		this.idExemplaire=idExemplaire;
 		// TODO Auto-generated constructor stub
 	}
 	public int getCodeExemplaire() {
-		return codeExemplaire;
+		return code;
 	}
 	public void setCodeExemplaire(int codeExemplaire) {
-		this.codeExemplaire = codeExemplaire;
+		this.code = codeExemplaire;
 	}
 	@Override
 	public String toString() {
-		return "Exemplaire [codeExemplaire=" + codeExemplaire + "]";
+		return "Exemplaire [codeExemplaire=" + code + "]";
 	}
 
 }

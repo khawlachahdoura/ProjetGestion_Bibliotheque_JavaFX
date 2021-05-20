@@ -4,6 +4,7 @@ import java.time.Instant;
 
 
 
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -49,7 +50,6 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.util.Callback;
-import view.View;
 
 public class Controller {
 	static GererNouveauEmprunt gEmprunt = new GererNouveauEmprunt(new ImpDAOGererNouveauEmp());
@@ -57,7 +57,7 @@ public class Controller {
 	private BorderPane root;
 	static boolean test = true;
 	static int val;
-	static Scanner sc = new Scanner(System.in);
+
 
 	public Controller(BorderPane root) {
 		this.root = root;
@@ -87,7 +87,144 @@ public class Controller {
 		root.setCenter(tableView);
 
 	}
+	public void getLivre(int idlivre) {
 
+		
+		TableView<Livre> tableView = new TableView<>();
+		List<Livre> l = new ArrayList<>();
+		
+		l = ImpDAOGererNouveauEmp.affichelistrecherchelivre(idlivre);
+		TableColumn<Livre, Integer> ISBN = new TableColumn<Livre, Integer>("ISBN");
+		TableColumn<Livre, String> titre = new TableColumn<Livre, String>("Titre");
+		TableColumn<Livre, String> auteur = new TableColumn<Livre, String>("Theme");
+		TableColumn<Livre, String> theme = new TableColumn<Livre, String>("Auteur");
+
+		tableView.getColumns().addAll(ISBN, titre, auteur, theme);
+
+		ISBN.setCellValueFactory(new PropertyValueFactory<>("ISBN"));
+		titre.setCellValueFactory(new PropertyValueFactory<>("titre"));
+		auteur.setCellValueFactory(new PropertyValueFactory<>("auteur"));
+		theme.setCellValueFactory(new PropertyValueFactory<>("theme"));
+		ObservableList<Livre> liste = FXCollections.observableArrayList(l);
+		
+		tableView.setItems(liste);
+		
+		root.setCenter(tableView);
+
+	}
+	public void creerTableViewRechercheLivre() {
+
+
+		GridPane gridPane = new GridPane();
+
+		gridPane.setPadding(new Insets(70, 70, 70, 70));
+		gridPane.setHgap(10);
+		gridPane.setVgap(10);
+
+		BorderPane border = new BorderPane();
+		
+
+		Label nom = new Label("Rechercher un livre :");
+		nom.setStyle("-fx-alignment: CENTER;-fx-focus-color: violet;");
+		nom.setFont(new Font("Arial", 25));
+		nom.setTextFill(Color.VIOLET);
+		gridPane.add(nom, 0, 0);
+		Label idlivre = new Label("Id de Livre : ");
+		final TextField txtid = new TextField();
+		Button btnRecherche = new Button("Rechercher");
+		final Label lblMessage = new Label();
+		gridPane.add(idlivre, 0, 2);
+		gridPane.add(txtid, 1, 2);
+		gridPane.add(btnRecherche, 3, 2);
+		
+		btnRecherche.setOnAction(new EventHandler<ActionEvent>() {
+
+			public void handle(ActionEvent event) {
+
+				
+				//String titre = txtitre.getText();
+
+				int id = Integer.parseInt(txtid.getText());
+				getLivre(id);
+				
+				
+			}
+		});
+		
+		root.setCenter(gridPane);
+		
+
+	}
+public void getEmprunt(int idEmp) {
+
+		
+		TableView<Emprunt> tableView = new TableView<>();
+		List<Emprunt> l = new ArrayList<>();
+		
+		l = ImpDAOGererNouveauEmp.affichelistrechercheEmprunt(idEmp);
+		
+		
+		TableColumn<Emprunt, Integer> idCol = new TableColumn<Emprunt, Integer>("id Emprunt");
+		TableColumn<Emprunt, Date> DateEmprunt = new TableColumn<Emprunt, Date>("Date Emprunt");
+		TableColumn<Emprunt, Date> DateRetour = new TableColumn<Emprunt, Date>("Date Retour");
+		TableColumn<Emprunt, Integer> idExemplaire = new TableColumn<Emprunt, Integer>(" id Exemplaire");
+		TableColumn<Emprunt, Integer> idEtudiant = new TableColumn<Emprunt, Integer>("id Etudiant");
+		TableColumn<Emprunt, Integer> etat = new TableColumn<Emprunt, Integer>("etat");
+
+		tableView.getColumns().addAll(idCol,idExemplaire, idEtudiant, DateEmprunt, DateRetour, etat);
+		
+		idCol.setCellValueFactory(new PropertyValueFactory<>("idEmprunt"));
+		DateEmprunt.setCellValueFactory(new PropertyValueFactory<>("date_E"));
+		DateRetour.setCellValueFactory(new PropertyValueFactory<>("date_RE"));
+		idExemplaire.setCellValueFactory(new PropertyValueFactory<>("idExemplaire"));
+		idEtudiant.setCellValueFactory(new PropertyValueFactory<>("idEtudiant"));
+		etat.setCellValueFactory(new PropertyValueFactory<>("etat"));
+		ObservableList<Emprunt> liste = FXCollections.observableArrayList(l);
+		ObservableList<Emprunt> list = getListEmprunt();
+		tableView.setItems(liste);
+		
+		root.setCenter(tableView);
+
+	}
+	public void creerTableViewRechercheEmprunt() {
+
+
+		GridPane gridPane = new GridPane();
+
+		gridPane.setPadding(new Insets(70, 70, 70, 70));
+		gridPane.setHgap(10);
+		gridPane.setVgap(10);
+
+		BorderPane border = new BorderPane();
+		
+
+		Label nom = new Label("Rechercher un Emprunt :");
+		nom.setStyle("-fx-alignment: CENTER;-fx-focus-color: violet;");
+		nom.setFont(new Font("Arial", 25));
+		nom.setTextFill(Color.VIOLET);
+		gridPane.add(nom, 0, 0);
+		Label idlivre = new Label("Id Emprunt : ");
+		final TextField txtid = new TextField();
+		Button btnRecherche = new Button("Rechercher");
+		final Label lblMessage = new Label();
+		gridPane.add(idlivre, 0, 2);
+		gridPane.add(txtid, 1, 2);
+		gridPane.add(btnRecherche, 3, 2);
+		
+		btnRecherche.setOnAction(new EventHandler<ActionEvent>() {
+
+			public void handle(ActionEvent event) {
+
+				int id = Integer.parseInt(txtid.getText());
+				getEmprunt(id);
+				}
+		});
+		
+
+		root.setCenter(gridPane);
+
+	}
+	
 	public void creerTableViewEmprunt() {
 
 		TableView<Emprunt> tableView = new TableView<>();
@@ -113,12 +250,11 @@ public class Controller {
 
 		ObservableList<Emprunt> list = getListEmprunt();
 		tableView.setItems(list);
-		for (int i = 0; i <= list.size(); i++) {
-
-		}
+		
 		root.setCenter(tableView);
 
 	}
+	
 
 	public static ObservableList<Livre> getListLivre() {
 
@@ -171,6 +307,36 @@ public class Controller {
 		// importer la liste et associe a la tableview;
 		ObservableList<Etudiant> list = getListEtudiant();
 		tableView.setItems(list);
+
+		root.setCenter(tableView);
+
+	}
+	public void creerTableViewExemplaire() {
+
+		TableView<Exemplaire> tableView = new TableView<>();
+		ArrayList<Exemplaire> l = new ArrayList<>();
+		l = ImpDAOGererNouveauEmp.affichelistExemplaires();
+		TableColumn<Exemplaire, Integer> id = new TableColumn<Exemplaire, Integer>("idExemplaire");
+		TableColumn<Exemplaire, Integer> codeEtudiant = new TableColumn<Exemplaire, Integer>("ISBN");
+		TableColumn<Exemplaire, String> nom = new TableColumn<Exemplaire, String>("Titre");
+		TableColumn<Exemplaire, String> prenom = new TableColumn<Exemplaire, String>("Theme");
+		TableColumn<Exemplaire, String> Auteur = new TableColumn<Exemplaire, String>("Auteur");
+		TableColumn<Exemplaire, Integer> groupe = new TableColumn<Exemplaire, Integer>("code");
+
+		// lien entre colonnnes et tableview
+		tableView.getColumns().addAll(id,codeEtudiant, nom, prenom,Auteur, groupe);
+		// lien entre champ de la classe Joueur avec la colonne nomCol
+		id.setCellValueFactory(new PropertyValueFactory<>("idExemplaire"));
+		codeEtudiant.setCellValueFactory(new PropertyValueFactory<>("ISBN"));
+		nom.setCellValueFactory(new PropertyValueFactory<>("Titre"));
+		prenom.setCellValueFactory(new PropertyValueFactory<>("Theme"));
+		Auteur.setCellValueFactory(new PropertyValueFactory<>("Auteur"));
+		groupe.setCellValueFactory(new PropertyValueFactory<>("code"));
+
+		// importer la liste et associe a la tableview;
+		ObservableList<Exemplaire> liste = FXCollections.observableArrayList(l);
+		
+		tableView.setItems(liste);
 
 		root.setCenter(tableView);
 
@@ -480,6 +646,7 @@ public class Controller {
 
 		Button btnajouter = new Button("Ajouter");
 		final Label lblMessage = new Label();
+		
 		Label ajouterexp = new Label("Ajouter un exemplaire pour ce livre :");
 		ajouterexp.setStyle("-fx-alignment: CENTER;-fx-focus-color: violet;");
 		ajouterexp.setFont(new Font("Arial", 20));
@@ -540,11 +707,11 @@ public class Controller {
 				int code = Integer.parseInt(txtcode.getText());
 
 				Livre livre = new Livre(isbn, titre, theme, auteur);
-				Exemplaire exemplaire = new Exemplaire(isbn, titre, theme, auteur, code);
+				Exemplaire exemplaire = new Exemplaire(0,isbn, titre, theme, auteur, code);
 				boolean test = gLivre.ajouterexemplaire(exemplaire);
 				if (test) {
-					lblMessage.setText("exemplaire ajouté avec succé");
-					lblMessage.setTextFill(Color.GREEN);
+					lblMessage1.setText("exemplaire ajouté avec succé");
+					lblMessage1.setTextFill(Color.GREEN);
 					// creerTableViewLivre();
 
 				} else {
