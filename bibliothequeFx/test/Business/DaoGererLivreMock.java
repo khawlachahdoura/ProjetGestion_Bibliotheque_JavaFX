@@ -8,14 +8,25 @@ public class DaoGererLivreMock implements IDAOGererLivre{
 
 	@Override
 	public boolean ajouter(Livre arg0) {
-		// TODO Auto-generated method stub
-		return false;
+		if(arg0.getISBN()==0&&arg0.getAuteur()==null&&arg0.getTheme()==null&&arg0.getTitre()==null){
+			System.out.println("ça marche le test return False,null input !");
+			return false;
+			}
+		else {
+			System.out.println("livre non null test unitaire doit être rouge !");
+		return true;}
+			
 	}
 
 	@Override
 	public boolean supprimer(int arg0) {
-		// TODO Auto-generated method stub
+		
+		if (arg0==0){
+			System.out.println("id null, test unitaire doit être vert !");
 		return false;
+		}else
+			System.out.println("id non null test unitaire doit être rouge !");
+			return true;
 	}
 
 	@Override
